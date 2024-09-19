@@ -1,6 +1,6 @@
 name: Deploy Python app to Azure Function
 
-on: [workflow_dispatch]
+on: [workflow_dispatch , push]
 
 env:
     AZURE_FUNCTIONAPP_NAME: 'py-func101'

@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 env:
     AZURE_FUNCTIONAPP_NAME: 'py-func101'
-    AZURE_FUNCTIONAPP_PACKAGE_PATH: ../
+    AZURE_FUNCTIONAPP_PACKAGE_PATH: .
     PYTHON_VERSION: '3.x'
 
 jobs:
@@ -13,17 +13,11 @@ jobs:
         steps:
             - name: 'checkout github action'
               uses: actions/checkout@v4
-
-            - name: listing
+            - name:
               run: |
-                ls
-                ls -la
-                pwd
-                cd ..
                 pwd
                 ls -la
-                cd ..
-                ls -la
+
             - name: setup python ${{env.PYTHON_VERSION}} environment
               uses: actions/setup-python@v4
               with:
@@ -31,7 +25,7 @@ jobs:
             - name: 'resolve project dependencies using pip'
               shell: bash
               run: |
-                pushd './${{env.AZURE_FUNCTIONAPP_PACKAGE_PATH}}'
+                pushd '${{env.AZURE_FUNCTIONAPP_PACKAGE_PATH}}'
                 python -m pip install --upgrade pip
                 pip install -r requirments.txt --target="python_packages/lib/site-packages"
                 popd
